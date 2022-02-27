@@ -4,11 +4,14 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { AlertProvider } from './context/AlertContext'
+import { WordsProvider } from './hooks/useWords'
 
 ReactDOM.render(
   <React.StrictMode>
     <AlertProvider>
-      <App />
+      <WordsProvider>
+        <App />
+      </WordsProvider>
     </AlertProvider>
   </React.StrictMode>,
   document.getElementById('root')

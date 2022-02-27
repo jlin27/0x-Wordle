@@ -1,31 +1,30 @@
-import { WORDS } from '../constants/wordlist'
-import { VALID_GUESSES } from '../constants/validGuesses'
 import { WRONG_SPOT_MESSAGE, NOT_CONTAINED_MESSAGE } from '../constants/strings'
 import { getGuessStatuses } from './statuses'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 
-export const isWordInWordList = (word: string) => {
-  return (
-    WORDS.includes(localeAwareLowerCase(word)) ||
-    VALID_GUESSES.includes(localeAwareLowerCase(word))
-  )
+export const isWordInWordList = (word: string, wordList: string[]) => {
+  return wordList.includes(localeAwareLowerCase(word))
 }
 
-export const isWinningWord = (word: string) => {
+export const isWinningWord = (word: string, solution: string) => {
   return solution === word
 }
 
 // build a set of previously revealed letters - present and correct
 // guess must use correct letters in that space and any other revealed letters
 // also check if all revealed instances of a letter are used (i.e. two C's)
-export const findFirstUnusedReveal = (word: string, guesses: string[]) => {
+export const findFirstUnusedReveal = (
+  solution: string,
+  word: string,
+  guesses: string[]
+) => {
   if (guesses.length === 0) {
     return false
   }
 
   const lettersLeftArray = new Array<string>()
   const guess = guesses[guesses.length - 1]
-  const statuses = getGuessStatuses(guess)
+  const statuses = getGuessStatuses(solution, guess)
 
   for (let i = 0; i < guess.length; i++) {
     if (statuses[i] === 'correct' || statuses[i] === 'present') {
@@ -73,18 +72,18 @@ export const localeAwareUpperCase = (text: string) => {
 }
 
 export const getWordOfDay = () => {
-  // January 1, 2022 Game Epoch
-  const epochMs = new Date('January 1, 2022 00:00:00').valueOf()
-  const now = Date.now()
-  const msInDay = 86400000
-  const index = Math.floor((now - epochMs) / msInDay)
-  const nextday = (index + 1) * msInDay + epochMs
-
-  return {
-    solution: localeAwareUpperCase(WORDS[index % WORDS.length]),
-    solutionIndex: index,
-    tomorrow: nextday,
-  }
+  // // January 1, 2022 Game Epoch
+  // const epochMs = new Date('January 1, 2022 00:00:00').valueOf()
+  // const now = Date.now()
+  // const msInDay = 86400000
+  // const index = Math.floor((now - epochMs) / msInDay)
+  // const nextday = (index + 1) * msInDay + epochMs
+  // const index = Math.floor(Math.random() * WORDS.length)
+  // return {
+  //   solution: localeAwareUpperCase(WORDS[index]),
+  //   solutionIndex: index,
+  //   tomorrow: 0,
+  // }
 }
 
-export const { solution, solutionIndex, tomorrow } = getWordOfDay()
+// export const { solution, solutionIndex, tomorrow } = getWordOfDay()

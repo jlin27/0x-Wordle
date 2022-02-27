@@ -19,7 +19,6 @@ import {
   HARD_MODE_ALERT_MESSAGE,
 } from './constants/strings'
 import {
-  MAX_WORD_LENGTH,
   MAX_CHALLENGES,
   REVEAL_TIME_MS,
   GAME_LOST_INFO_DELAY,
@@ -28,7 +27,6 @@ import {
 import {
   isWordInWordList,
   isWinningWord,
-  solution,
   findFirstUnusedReveal,
   unicodeLength,
 } from './lib/words'
@@ -44,12 +42,14 @@ import { default as GraphemeSplitter } from 'grapheme-splitter'
 import './App.css'
 import { AlertContainer } from './components/alerts/AlertContainer'
 import { useAlert } from './context/AlertContext'
+import { useWords } from './hooks/useWords'
 
 function App() {
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme: dark)'
   ).matches
 
+  const { wordLength, solution, wordsList, setWordLength } = useWords()
   const { showError: showErrorAlert, showSuccess: showSuccessAlert } =
     useAlert()
   const [currentGuess, setCurrentGuess] = useState('')
@@ -95,6 +95,12 @@ function App() {
       ? localStorage.getItem('gameMode') === 'hard'
       : false
   )
+
+  useEffect(() => {
+    // remove current guesses when word length (hence solution) is changed
+    setGuesses([])
+    setCurrentGuess('')
+  }, [solution])
 
   useEffect(() => {
     // if no game state on load,
@@ -145,13 +151,13 @@ function App() {
 
   useEffect(() => {
     saveGameStateToLocalStorage({ guesses, solution })
-  }, [guesses])
+  }, [guesses, solution])
 
   useEffect(() => {
     if (isGameWon) {
       const winMessage =
         WIN_MESSAGES[Math.floor(Math.random() * WIN_MESSAGES.length)]
-      const delayMs = REVEAL_TIME_MS * MAX_WORD_LENGTH
+      const delayMs = REVEAL_TIME_MS * wordLength
 
       showSuccessAlert(winMessage, {
         delayMs,
@@ -164,11 +170,11 @@ function App() {
         setIsStatsModalOpen(true)
       }, GAME_LOST_INFO_DELAY)
     }
-  }, [isGameWon, isGameLost, showSuccessAlert])
+  }, [isGameWon, isGameLost, showSuccessAlert, wordLength])
 
   const onChar = (value: string) => {
     if (
-      unicodeLength(`${currentGuess}${value}`) <= MAX_WORD_LENGTH &&
+      unicodeLength(`${currentGuess}${value}`) <= wordLength &&
       guesses.length < MAX_CHALLENGES &&
       !isGameWon
     ) {
@@ -187,14 +193,14 @@ function App() {
       return
     }
 
-    if (!(unicodeLength(currentGuess) === MAX_WORD_LENGTH)) {
+    if (!(unicodeLength(currentGuess) === wordLength)) {
       setCurrentRowClass('jiggle')
       return showErrorAlert(NOT_ENOUGH_LETTERS_MESSAGE, {
         onClose: clearCurrentRowClass,
       })
     }
 
-    if (!isWordInWordList(currentGuess)) {
+    if (!isWordInWordList(currentGuess, wordsList)) {
       setCurrentRowClass('jiggle')
       return showErrorAlert(WORD_NOT_FOUND_MESSAGE, {
         onClose: clearCurrentRowClass,
@@ -203,7 +209,11 @@ function App() {
 
     // enforce hard mode - all guesses must contain all previously revealed letters
     if (isHardMode) {
-      const firstMissingReveal = findFirstUnusedReveal(currentGuess, guesses)
+      const firstMissingReveal = findFirstUnusedReveal(
+        solution,
+        currentGuess,
+        guesses
+      )
       if (firstMissingReveal) {
         setCurrentRowClass('jiggle')
         return showErrorAlert(firstMissingReveal, {
@@ -217,12 +227,12 @@ function App() {
     // chars have been revealed
     setTimeout(() => {
       setIsRevealing(false)
-    }, REVEAL_TIME_MS * MAX_WORD_LENGTH)
+    }, REVEAL_TIME_MS * wordLength)
 
-    const winningWord = isWinningWord(currentGuess)
+    const winningWord = isWinningWord(currentGuess, solution)
 
     if (
-      unicodeLength(currentGuess) === MAX_WORD_LENGTH &&
+      unicodeLength(currentGuess) === wordLength &&
       guesses.length < MAX_CHALLENGES &&
       !isGameWon
     ) {
@@ -239,15 +249,19 @@ function App() {
         setIsGameLost(true)
         showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
           persist: true,
-          delayMs: REVEAL_TIME_MS * MAX_WORD_LENGTH + 1,
+          delayMs: REVEAL_TIME_MS * wordLength + 1,
         })
       }
     }
   }
 
+  const changeWordLength = (e: any) => {
+    setWordLength(Number(e.target.value))
+  }
+
   return (
     <div className="pt-2 pb-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div className="flex w-80 mx-auto items-center mb-8 mt-20">
+      <div className="flex w-80 mx-auto items-center mb-3 mt-2">
         <h1 className="text-xl ml-2.5 grow font-bold dark:text-white">
           {GAME_TITLE}
         </h1>
@@ -263,6 +277,51 @@ function App() {
           className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
           onClick={() => setIsSettingsModalOpen(true)}
         />
+      </div>
+      <div className="flex w-80 mx-auto items-center mb-1">
+        <h1 className="text-md ml-2.5 mr-3 font-bold dark:text-white">
+          Choose word length:
+        </h1>
+        <div className="dark:text-white">
+          <label className="mr-1" htmlFor="3">
+            3
+          </label>
+          <input
+            className="mr-4"
+            onChange={changeWordLength}
+            type="radio"
+            id="3"
+            value={3}
+            name="wordLength"
+            defaultChecked
+          />
+          <label className="mr-1" htmlFor="4">
+            4
+          </label>
+          <input
+            onChange={changeWordLength}
+            type="radio"
+            id="4"
+            value={4}
+            name="wordLength"
+          />
+        </div>
+      </div>
+      <div className="flex w-80 mx-auto items-center mb-8">
+        <h1 className="text-md ml-2.5 mr-0.5 dark:text-white">
+          Stuck? Refer to:
+        </h1>
+        <a
+          style={{
+            color: 'cyan',
+            textDecoration: 'underline',
+          }}
+          href="https://docs.makerdao.com/other-documentation/system-glossary"
+          target={'_blank'}
+          rel="noopener noreferrer"
+        >
+          MakerDAO glossary
+        </a>
       </div>
       <Grid
         guesses={guesses}

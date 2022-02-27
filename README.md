@@ -1,4 +1,14 @@
-# React Wordle
+# WADLE
+
+Wordle fork but with MakerDAO contracts' terminology!
+
+<img src="./public/metaIMG.png">
+
+Refer to the MakerDAO glossary: <a href="https://docs.makerdao.com/other-documentation/system-glossary">here</a>
+
+<hr />
+
+## Original Readme:
 
 This is a clone project of the popular word guessing game we all know and love. Made using React, Typescript, and Tailwind.
 

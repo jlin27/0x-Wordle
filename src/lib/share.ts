@@ -1,9 +1,10 @@
 import { getGuessStatuses } from './statuses'
-import { solutionIndex } from './words'
 import { GAME_TITLE } from '../constants/strings'
 import { MAX_CHALLENGES } from '../constants/settings'
 
 export const shareStatus = (
+  solution: string,
+  solutionIndex: number,
   guesses: string[],
   lost: boolean,
   isHardMode: boolean,
@@ -14,14 +15,22 @@ export const shareStatus = (
     `${GAME_TITLE} ${solutionIndex} ${
       lost ? 'X' : guesses.length
     }/${MAX_CHALLENGES}${isHardMode ? '*' : ''}\n\n` +
-      generateEmojiGrid(guesses, getEmojiTiles(isDarkMode, isHighContrastMode))
+      generateEmojiGrid(
+        solution,
+        guesses,
+        getEmojiTiles(isDarkMode, isHighContrastMode)
+      )
   )
 }
 
-export const generateEmojiGrid = (guesses: string[], tiles: string[]) => {
+export const generateEmojiGrid = (
+  solution: string,
+  guesses: string[],
+  tiles: string[]
+) => {
   return guesses
     .map((guess) => {
-      const status = getGuessStatuses(guess)
+      const status = getGuessStatuses(solution, guess)
       return guess
         .split('')
         .map((_, i) => {

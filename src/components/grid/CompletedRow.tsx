@@ -1,6 +1,7 @@
 import { getGuessStatuses } from '../../lib/statuses'
 import { Cell } from './Cell'
 import { unicodeSplit } from '../../lib/words'
+import { useWords } from '../../hooks/useWords'
 
 type Props = {
   guess: string
@@ -8,7 +9,9 @@ type Props = {
 }
 
 export const CompletedRow = ({ guess, isRevealing }: Props) => {
-  const statuses = getGuessStatuses(guess)
+  const { solution } = useWords()
+
+  const statuses = getGuessStatuses(solution, guess)
   const splitGuess = unicodeSplit(guess)
 
   return (

@@ -15,53 +15,43 @@ export const InfoModal = ({ isOpen, handleClose }: Props) => {
       </p>
 
       <div className="flex justify-center mb-1 mt-4">
-        <Cell
-          isRevealing={true}
-          isCompleted={true}
-          value="W"
-          status="correct"
-        />
-        <Cell value="E" />
-        <Cell value="A" />
-        <Cell value="R" />
-        <Cell value="Y" />
+        <Cell isCompleted={true} value="W" />
+        <Cell value="A" status="correct" />
+        <Cell value="D" />
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        The letter W is in the word and in the correct spot.
+        The letter A is in the word and in the correct spot.
       </p>
 
       <div className="flex justify-center mb-1 mt-4">
-        <Cell value="P" />
-        <Cell value="I" />
+        <Cell value="F" />
+        <Cell value="R" />
         <Cell
           isRevealing={true}
           isCompleted={true}
-          value="L"
+          value="O"
           status="present"
         />
-        <Cell value="O" />
-        <Cell value="T" />
+        <Cell value="B" />
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        The letter L is in the word but in the wrong spot.
+        The letter O is in the word but in the wrong spot.
       </p>
 
       <div className="flex justify-center mb-1 mt-4">
-        <Cell value="V" />
-        <Cell value="A" />
-        <Cell value="G" />
-        <Cell isRevealing={true} isCompleted={true} value="U" status="absent" />
-        <Cell value="E" />
+        <Cell value="I" />
+        <Cell value="L" />
+        <Cell isRevealing={true} isCompleted={true} value="K" status="absent" />
       </div>
       <p className="text-sm text-gray-500 dark:text-gray-300">
-        The letter U is not in the word in any spot.
+        The letter K is not in the word in any spot.
       </p>
 
       <p className="mt-6 italic text-sm text-gray-500 dark:text-gray-300">
-        This is an open source version of the word guessing game we all know and
-        love -{' '}
+        This is a version of wordle but with words from MakerDAO's MCD glossary
+        -{' '}
         <a
-          href="https://github.com/cwackerfuss/react-wordle"
+          href="https://github.com/apoorvlathey/wadle.git"
           className="underline font-bold"
         >
           check out the code here
