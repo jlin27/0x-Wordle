@@ -1,6 +1,3 @@
-# 0x Wordle
-Wordle fork but with 0x's terminology!
-=======
 # 0x World
 
 Learn 0x's terminology through this fork of the popular game Wordle!
