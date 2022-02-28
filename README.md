@@ -7,8 +7,6 @@ Learn 0x's terminology through this fork of the popular game Wordle!
 
 Inspiration from [Chase Wakerfuss's React Wordle](https://github.com/cwackerfuss/react-wordle/tree/9c54da04912f155a643698d163aa81d8e79fae5b/src) and [Apporv Lathey's Wadle](https://github.com/apoorvlathey/wadle).  
 
-Refer to the 0x glossary: <a href="https://docs.0x.org/developer-resources/glossary">here</a>
-=======
 Refer to the 0x's documentation: <a href="https://docs.0x.org">here</a>
 
 <hr />
