@@ -43,6 +43,7 @@ import './App.css'
 import { AlertContainer } from './components/alerts/AlertContainer'
 import { useAlert } from './context/AlertContext'
 import { useWords } from './hooks/useWords'
+import { Navbar } from './components/navbar/Navbar'
 
 function App() {
   const prefersDarkMode = window.matchMedia(
@@ -260,110 +261,110 @@ function App() {
   }
 
   return (
-    <div className="pt-2 pb-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div className="flex w-80 mx-auto items-center mb-3 mt-2">
-        <h1 className="text-xl ml-2.5 grow font-bold dark:text-white">
-          {GAME_TITLE}
-        </h1>
-        <InformationCircleIcon
-          className="h-6 w-6 mr-2 cursor-pointer dark:stroke-white"
-          onClick={() => setIsInfoModalOpen(true)}
-        />
-        <ChartBarIcon
-          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
-          onClick={() => setIsStatsModalOpen(true)}
-        />
-        <CogIcon
-          className="h-6 w-6 mr-3 cursor-pointer dark:stroke-white"
-          onClick={() => setIsSettingsModalOpen(true)}
-        />
-      </div>
-      <div className="flex w-80 mx-auto items-center mb-1">
-        <h1 className="text-md ml-2.5 mr-3 font-bold dark:text-white">
-          Choose word length:
-        </h1>
-        <div className="dark:text-white">
-          <label className="mr-1" htmlFor="3">
-            3
-          </label>
-          <input
-            className="mr-4"
-            onChange={changeWordLength}
-            type="radio"
-            id="3"
-            value={3}
-            name="wordLength"
-            defaultChecked
-          />
-          <label className="mr-1" htmlFor="4">
-            4
-          </label>
-          <input
-            onChange={changeWordLength}
-            type="radio"
-            id="4"
-            value={4}
-            name="wordLength"
-          />
+    <div className="h-screen flex flex-col">
+      <Navbar
+        setIsInfoModalOpen={setIsInfoModalOpen}
+        setIsStatsModalOpen={setIsStatsModalOpen}
+        setIsSettingsModalOpen={setIsSettingsModalOpen}
+      />
+      <div className="pt-2 px-1 pb-8 md:max-w-7xl w-full mx-auto sm:px-6 lg:px-8 flex flex-col grow">
+        <div className="flex w-80 mx-auto items-center mb-1">
+          <h1 className="text-md ml-2.5 mr-3 font-bold dark:text-white">
+            Choose word length:
+          </h1>
+          <div className="dark:text-white">
+            <label className="mr-1" htmlFor="3">
+              3
+            </label>
+            <input
+              className="mr-4"
+              onChange={changeWordLength}
+              type="radio"
+              id="3"
+              value={3}
+              name="wordLength"
+              defaultChecked
+            />
+            <label className="mr-1" htmlFor="4">
+              4
+            </label>
+            <input
+              onChange={changeWordLength}
+              type="radio"
+              id="4"
+              value={4}
+              name="wordLength"
+            />
+            <label className="ml-4 mr-1" htmlFor="5">
+              5
+            </label>
+            <input
+              onChange={changeWordLength}
+              type="radio"
+              id="5"
+              value={5}
+              name="wordLength"
+            />
+          </div>
         </div>
-      </div>
-      <div className="flex w-80 mx-auto items-center mb-8">
-        <h1 className="text-md ml-2.5 mr-0.5 dark:text-white">
-          Stuck? Refer to:
-        </h1>
-        <a
-          style={{
-            color: 'cyan',
-            textDecoration: 'underline',
-          }}
-          href="https://docs.makerdao.com/other-documentation/system-glossary"
-          target={'_blank'}
-          rel="noopener noreferrer"
-        >
-          MakerDAO glossary
-        </a>
-      </div>
-      <Grid
-        guesses={guesses}
-        currentGuess={currentGuess}
-        isRevealing={isRevealing}
-        currentRowClassName={currentRowClass}
-      />
-      <Keyboard
-        onChar={onChar}
-        onDelete={onDelete}
-        onEnter={onEnter}
-        guesses={guesses}
-        isRevealing={isRevealing}
-      />
-      <InfoModal
-        isOpen={isInfoModalOpen}
-        handleClose={() => setIsInfoModalOpen(false)}
-      />
-      <StatsModal
-        isOpen={isStatsModalOpen}
-        handleClose={() => setIsStatsModalOpen(false)}
-        guesses={guesses}
-        gameStats={stats}
-        isGameLost={isGameLost}
-        isGameWon={isGameWon}
-        handleShare={() => showSuccessAlert(GAME_COPIED_MESSAGE)}
-        isHardMode={isHardMode}
-        isDarkMode={isDarkMode}
-        isHighContrastMode={isHighContrastMode}
-      />
-      <SettingsModal
-        isOpen={isSettingsModalOpen}
-        handleClose={() => setIsSettingsModalOpen(false)}
-        isHardMode={isHardMode}
-        handleHardMode={handleHardMode}
-        isDarkMode={isDarkMode}
-        handleDarkMode={handleDarkMode}
-        isHighContrastMode={isHighContrastMode}
-        handleHighContrastMode={handleHighContrastMode}
-      />
+        <div className="flex w-80 mx-auto items-center mb-8">
+          <h1 className="text-md ml-2.5 mr-0.5 dark:text-white">
+            Stuck? Refer to:
+          </h1>
+          <a
+            style={{
+              color: '#009582',
+              textDecoration: 'underline',
+            }}
+            href="https://docs.0x.org/developer-resources/glossary"
+            target={'_blank'}
+            rel="noopener noreferrer"
+          >
+            0x documentation
+          </a>
+        </div>
+        <Grid
+          guesses={guesses}
+          currentGuess={currentGuess}
+          isRevealing={isRevealing}
+          currentRowClassName={currentRowClass}
+        />
+        <Keyboard
+          onChar={onChar}
+          onDelete={onDelete}
+          onEnter={onEnter}
+          guesses={guesses}
+          isRevealing={isRevealing}
+        />
+        <InfoModal
+          isOpen={isInfoModalOpen}
+          handleClose={() => setIsInfoModalOpen(false)}
+        />
+        <StatsModal
+          isOpen={isStatsModalOpen}
+          handleClose={() => setIsStatsModalOpen(false)}
+          guesses={guesses}
+          gameStats={stats}
+          isGameLost={isGameLost}
+          isGameWon={isGameWon}
+          handleShare={() => showSuccessAlert(GAME_COPIED_MESSAGE)}
+          isHardMode={isHardMode}
+          isDarkMode={isDarkMode}
+          isHighContrastMode={isHighContrastMode}
+        />
+        <SettingsModal
+          isOpen={isSettingsModalOpen}
+          handleClose={() => setIsSettingsModalOpen(false)}
+          isHardMode={isHardMode}
+          handleHardMode={handleHardMode}
+          isDarkMode={isDarkMode}
+          handleDarkMode={handleDarkMode}
+          isHighContrastMode={isHighContrastMode}
+          handleHighContrastMode={handleHighContrastMode}
+        />
 
-      <AlertContainer />
+        <AlertContainer />
+      </div>
     </div>
   )
 }

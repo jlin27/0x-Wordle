@@ -32,7 +32,7 @@ export const WordsProvider: React.FunctionComponent = ({ children }) => {
     if (wordsList.length > 0) {
       const _index = Math.floor(Math.random() * wordsList.length)
       const _solution = wordsList[_index]
-      setSolutionIndex(WORDS.indexOf(_solution)) // using WORDS instead of wordsList so that index is unique even for 3 or 4 letter games
+      setSolutionIndex(WORDS.indexOf(_solution)) // using WORDS instead of wordsList so that index is unique even for 3, 4, or 5 letter games
       setSolution(localeAwareUpperCase(_solution))
     }
   }, [wordsList])
