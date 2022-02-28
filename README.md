@@ -1,4 +1,4 @@
-# 0x World
+# 0x Wordle
 
 Learn 0x's terminology through this fork of the popular game Wordle!
 
