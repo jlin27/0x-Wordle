@@ -7,8 +7,7 @@ Inspiration from [Chase Wakerfuss's React Wordle](https://github.com/cwackerfuss
 Refer to the 0x's documentation: <a href="https://docs.0x.org">here</a>
 
 
-![video](https://user-images.githubusercontent.com/8042156/155946832-4a93a3ce-5c3a-48f0-b97c-6583e3449359.mp4)
-
+![video](https://github.com/jlin27/0x-Wordle/blob/main/public/0x-wordle.gif)
 
 
 <hr />
