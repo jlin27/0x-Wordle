@@ -6,6 +6,8 @@ Inspiration from [Chase Wakerfuss's React Wordle](https://github.com/cwackerfuss
 
 Refer to the 0x's documentation: <a href="https://docs.0x.org">here</a>
 
+<a href="https://github.com/jlin27/0x-Wordle/blob/main/public/0x-wordle-video.mp4" title="Demo Video"><img src="https://github.com/jlin27/0x-Wordle/blob/main/public/0x-wordle-video.mp4" alt="Demo Video" /></a>
+
 <hr />
 
 ## Original Readme:
