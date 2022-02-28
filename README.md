@@ -1,10 +1,10 @@
-# WADLE
+# 0x World
 
-Wordle fork but with MakerDAO contracts' terminology!
+Learn 0x's terminology through this fork of the popular game Wordle!
 
-<img src="./public/metaIMG.png">
+Inspiration from [Chase Wakerfuss's React Wordle](https://github.com/cwackerfuss/react-wordle/tree/9c54da04912f155a643698d163aa81d8e79fae5b/src) and [Apporv Lathey's Wadle](https://github.com/apoorvlathey/wadle).  
 
-Refer to the MakerDAO glossary: <a href="https://docs.makerdao.com/other-documentation/system-glossary">here</a>
+Refer to the 0x's documentation: <a href="https://docs.0x.org">here</a>
 
 <hr />
 
@@ -21,7 +21,7 @@ This is a clone project of the popular word guessing game we all know and love. 
 Clone the repository and perform the following command line actions:
 
 ```bash
-$> cd react-wordle
+$> cd 0x-Wordle
 $> npm install
 $> npm run start
 ```
