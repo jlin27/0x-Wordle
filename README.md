@@ -1,19 +1,15 @@
-<<<<<<< HEAD
 # 0x Wordle
 Wordle fork but with 0x's terminology!
 =======
 # 0x World
 
 Learn 0x's terminology through this fork of the popular game Wordle!
->>>>>>> 065ff5a234123c9ce04f95e067a9c4f6a44a71a4
 
 Inspiration from [Chase Wakerfuss's React Wordle](https://github.com/cwackerfuss/react-wordle/tree/9c54da04912f155a643698d163aa81d8e79fae5b/src) and [Apporv Lathey's Wadle](https://github.com/apoorvlathey/wadle).  
 
-<<<<<<< HEAD
 Refer to the 0x glossary: <a href="https://docs.0x.org/developer-resources/glossary">here</a>
 =======
 Refer to the 0x's documentation: <a href="https://docs.0x.org">here</a>
->>>>>>> 065ff5a234123c9ce04f95e067a9c4f6a44a71a4
 
 <hr />
 
@@ -30,11 +26,7 @@ This is a clone project of the popular word guessing game we all know and love. 
 Clone the repository and perform the following command line actions:
 
 ```bash
-<<<<<<< HEAD
-$> cd 0x-wordle
-=======
 $> cd 0x-Wordle
->>>>>>> 065ff5a234123c9ce04f95e067a9c4f6a44a71a4
 $> npm install
 $> npm run start
 ```
