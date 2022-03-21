@@ -3,12 +3,12 @@
   "name": "0x Wordle",
   "icons": [
     {
-      "src": "0x_favicon.png",
+      "src": "favicon.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "0x_logo.png",
+      "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     }
