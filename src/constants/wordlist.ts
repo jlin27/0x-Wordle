@@ -65,6 +65,7 @@ export const WORDS = [
 'smart',
 'specs',
 'store',
+'swap',
 'swaps',
 'taker',
 'time',
